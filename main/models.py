@@ -3,12 +3,12 @@ from django.db import models
 
 # Create your models here.
 class Bucket(models.Model):
+    title = models.CharField(max_length=20)
     volume = models.IntegerField()
     condition = models.IntegerField()
 
     def __str__(self):
-        self.name = f'Bucket {self.volume} Liters'
-        return self.name
+        return self.title
 
     def check_condition(self):
         if self.condition > self.volume:
@@ -17,3 +17,11 @@ class Bucket(models.Model):
         elif self.condition < 0:
             self.condition = 0
             return self.condition
+
+    def fill_up_bucket(self):
+        self.condition += self.volume
+        self.check_condition()
+        return self.condition
+
+# class ImageBucket(models.Model):
+#     volume = models.ForeignKey()

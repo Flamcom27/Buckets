@@ -1,14 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-    <h1>
-        {% for bucket in buckets %}
-            bucket {{bucket.volume}} liters
-        {% endfor %}
-    </h1>
-</body>
+    <head>
+        <style>
+            .button {
+                height: 27px;
+                width: 150px;
+            }
+        </style>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
+        <h1>
+            {% for bucket in buckets %}
+                {{bucket.title}}
+                    <button class="button">
+                        <a>
+                            fill up {{ bucket.title }}
+                        </a>
+                    </button>
+                    <button class="button">
+                        <a>
+                            pour out {{ bucket.title }}
+                        </a>
+                    </button>
+                <br>{{ bucket.condition }}/{{ bucket.volume }}<br>
+            {% endfor %}
+        </h1>
+    </body>
 </html>
