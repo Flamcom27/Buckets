@@ -18,9 +18,8 @@
 
                     <form action="" method="post">
                         {% csrf_token %}
-                        fill_up_bucket<input type="submit" value="{{ bucket.volume }}" name="bucket">
-                            {{ bucket.title }}
-                        </input>
+                        <input type="submit" value="fill up bucket {{ bucket.volume }}" name="bucket"></input>
+                        <input type="submit" value="pour out bucket {{ bucket.volume }}" name="bucket"></input>
                     </form>
 {#                    <form action="" method="post">#}
 {#                        {% csrf_token %}#}
@@ -33,7 +32,7 @@
 {#                                pour out {{ bucket.title }}#}
 {#                            </a>#}
 {#                        </button>#}
-                <br>{{ bucket.condition }}/{{ bucket.volume }}<br>
+                {{ bucket.condition }}/{{ bucket.volume }}<br><br>
             {% endfor %}
         </h1>
     </body>

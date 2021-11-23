@@ -19,15 +19,17 @@ class BucketsView(TemplateView, Bucket):
     # bucket_3 = Bucket.objects.filter(volume=3).get()
 
     def get(self, request):
+        self.buckets = Bucket.objects.all()
         return render(request, self.template_name, {
             "buckets": self.buckets
         })
 
     def post(self, request):
-        volume_of_bucket = int(request.POST["bucket"])
+        method = request.POST["bucket"]
+        volume_of_bucket = int(method[-1])
         bucket = Bucket.objects.filter(volume=volume_of_bucket).get()
-        bucket.fill_up_bucket()
-        Bucket.objects.filter(volume=bucket.volume).update(condition = bucket.condition)
+        cur_con = bucket.bucket_method(method, volume_of_bucket)
+        Bucket.objects.filter(volume=volume_of_bucket).update(condition=cur_con)
         self.buckets = Bucket.objects.all()
         return render(request, self.template_name, {
             "buckets": self.buckets

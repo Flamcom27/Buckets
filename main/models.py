@@ -13,7 +13,7 @@ class Bucket(models.Model):
     def __str__(self):
         return self.title
 
-    def check_condition(self):
+    def _check_condition(self):
         if self.condition > self.volume:
             self.condition = self.volume
             return self.condition
@@ -23,8 +23,19 @@ class Bucket(models.Model):
 
     def fill_up_bucket(self):
         self.condition += self.volume
-        self.check_condition()
+        self._check_condition()
         return self.condition
+
+    def pour_out_bucket(self):
+        self.condition -= self.volume
+        self._check_condition()
+        return self.condition
+
+    def bucket_method(self, method, num):
+        if method == f'fill up bucket {num}':
+            return self.fill_up_bucket()
+        elif method == f'pour out bucket {num}':
+            return self.pour_out_bucket()
 
 # class ImageBucket(models.Model):
 #     volume = models.ForeignKey()
