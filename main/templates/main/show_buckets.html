@@ -13,17 +13,26 @@
     <body>
         <h1>
             {% for bucket in buckets %}
-                {{bucket.title}}
-                    <button class="button">
-                        <a>
-                            fill up {{ bucket.title }}
-                        </a>
-                    </button>
-                    <button class="button">
-                        <a>
-                            pour out {{ bucket.title }}
-                        </a>
-                    </button>
+                {{ bucket.title }}
+{#                {{ bucket_3.title }}#}
+
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        fill_up_bucket<input type="submit" value="{{ bucket.volume }}" name="bucket">
+                            {{ bucket.title }}
+                        </input>
+                    </form>
+{#                    <form action="" method="post">#}
+{#                        {% csrf_token %}#}
+{#                        <input type="submit" value="{{ bucket_3.volume }}" name="bucket">#}
+{#                            {{ bucket_3.title }}#}
+{#                        </input>#}
+{#                    </form>#}
+{#                        <button class="button">#}
+{#                            <a>#}
+{#                                pour out {{ bucket.title }}#}
+{#                            </a>#}
+{#                        </button>#}
                 <br>{{ bucket.condition }}/{{ bucket.volume }}<br>
             {% endfor %}
         </h1>
