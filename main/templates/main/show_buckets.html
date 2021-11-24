@@ -20,20 +20,15 @@
                         {% csrf_token %}
                         <input type="submit" value="fill up bucket {{ bucket.volume }}" name="bucket"></input>
                         <input type="submit" value="pour out bucket {{ bucket.volume }}" name="bucket"></input>
+                        {% if bucket == buckets.0 %}
+                        <input type="submit" value="pour over from bucket {{ buckets.0.volume }} to bucket {{ buckets.1.volume }}" name="bucket"></input>
+                        {% elif bucket == buckets.1 %}
+                        <input type="submit" value="pour over from bucket {{ buckets.1.volume }} to bucket {{ buckets.0.volume }}" name="bucket"></input>
+                        {% endif %}
                     </form>
-{#                    <form action="" method="post">#}
-{#                        {% csrf_token %}#}
-{#                        <input type="submit" value="{{ bucket_3.volume }}" name="bucket">#}
-{#                            {{ bucket_3.title }}#}
-{#                        </input>#}
-{#                    </form>#}
-{#                        <button class="button">#}
-{#                            <a>#}
-{#                                pour out {{ bucket.title }}#}
-{#                            </a>#}
-{#                        </button>#}
                 {{ bucket.condition }}/{{ bucket.volume }}<br><br>
             {% endfor %}
+{#        {{ buckets[1] }}#}
         </h1>
     </body>
 </html>

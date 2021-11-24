@@ -26,10 +26,13 @@ class BucketsView(TemplateView, Bucket):
 
     def post(self, request):
         method = request.POST["bucket"]
-        volume_of_bucket = int(method[-1])
-        bucket = Bucket.objects.filter(volume=volume_of_bucket).get()
-        cur_con = bucket.bucket_method(method, volume_of_bucket)
-        Bucket.objects.filter(volume=volume_of_bucket).update(condition=cur_con)
+        nums = [int(i) for i in method.split() if i.isdigit()]
+        bucket = Bucket.objects.filter(volume=nums[0]).get()
+        # volume_of_bucket = int(method[-1])
+        # bucket = Bucket.objects.filter(volume=volume_of_bucket).get()
+        # print(nums)
+        bucket.bucket_method(method, nums)
+        # Bucket.objects.filter(volume=volume_of_bucket).update(condition=cur_con)
         self.buckets = Bucket.objects.all()
         return render(request, self.template_name, {
             "buckets": self.buckets
